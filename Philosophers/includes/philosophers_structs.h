@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 14:44:38 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/26 16:38:10 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,30 @@
 typedef struct s_arg
 {
 	int					total;
-	int					die;
-	int					eat;
-	int					sleep;
-	int					m_eat;
+	int					nb_meal;
+	int					death_t;
+	int					eat_t;
+	int					sleep_t;
 	long int			start_t;
+	int					dead;
+	int					end;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		lock;
 	pthread_mutex_t		write_mutex;
-	pthread_mutex_t		dead;
-	pthread_mutex_t		time_eat;
-	pthread_mutex_t		finish;
-	int					nb_p_end;
 }						t_arg;
 
 /*struct du philo*/
 typedef struct s_philo
 {
 	int					id;
-	pthread_t			thread_id;
-	pthread_t			thread_death_id;
-	pthread_mutex_t		*r_f;
-	pthread_mutex_t		*l_f;
 	t_arg				*pa;
-	long int			ms_eat;
+	pthread_t			thread_id;
 	unsigned int		nb_eat;
 	int					eating;
-	int					end;
+	int					dying_time;
+	pthread_mutex_t		lock;
+	pthread_mutex_t		*r_f;
+	pthread_mutex_t		*l_f;
 }						t_philo;
 
 /*struct a tout faire*/

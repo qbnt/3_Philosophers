@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:23:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 13:31:13 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/26 16:39:38 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 /*----------------------------------------------------------------------------*/
 
-void	*routine(void *arg)
+void	*routine(void *philo_ptr)
 {
-	arg += 0;
+	t_philo	*philo;
+
+	philo = philo_ptr;
 	printf("OUI\n");
-	return (arg);
+	return (philo_ptr);
 }

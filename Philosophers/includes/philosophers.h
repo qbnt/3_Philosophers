@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 14:55:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/26 16:39:13 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 /*parsing.c*/
 int		parsing(int argc, char **argv, t_p *p);
 void	init_philo(t_philo *philo, t_arg *arg, int id);
+void	init_forks(t_p *p);
 
 /*routine.c*/
 void	*routine(void *arg);
@@ -48,6 +49,6 @@ void	*routine(void *arg);
 /*actions.c*/
 void	message(char *str, t_philo *philo);
 void	eat(t_philo *philo);
-void	set_time(t_p *p);
+void	get_time(t_p *p);
 
 #endif

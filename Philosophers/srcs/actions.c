@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 14:57:17 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/26 16:40:31 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ static void	drop_forks(t_philo *philo);
 
 void	message(char *str, t_philo *philo)
 {
-	unsigned long long	time;
-
-	time = ;
 	pthread_mutex_lock(&philo->pa->write_mutex);
 	printf("%d: Philosopher %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->pa->write_mutex);
@@ -30,17 +27,17 @@ void	message(char *str, t_philo *philo)
 void	eat(t_philo *philo)
 {
 	take_forks(philo);
-	pthread_mutex_lock(&philo->pa->time_eat);
+	pthread_mutex_lock(&philo->pa->lock);
 	philo->eating = 1;
 	message(EATING, philo);
 	philo->nb_eat ++;
-	usleap(philo->pa->time_eat);
+	usleap(philo->pa->eat_t);
 	philo->eating = 0;
-	pthread_mutex_unlock(&philo->pa->time_eat);
+	pthread_mutex_unlock(&philo->pa->lock);
 	drop_forks(philo);
 }
 
-void	set_time(t_p *p)
+void	get_time(t_p *p)
 {
 	struct timeval	tv;
 
@@ -62,5 +59,5 @@ static void	drop_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->r_f);
 	pthread_mutex_unlock(&philo->l_f);
 	message(SLEEPING, philo);
-	usleap(philo->pa->sleep);
+	usleap(philo->pa->sleep_t);
 }
