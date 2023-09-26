@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 14:54:48 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:58:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	main(int argc, char **argv)
 	t_p	p;
 
 	if (!parsing(argc, argv, &p))
-		return (perror("Invalid Arguments dude\n"));
+		return (perror("Invalid Arguments dude\n"), EXIT_FAILURE);
 	set_time(&p);
 	p.ph = malloc(p.a.total * sizeof(t_philo));
 	if (!p.ph)
-		return (perror("Malloc fucked up bro\n"));
+		return (perror("Malloc fucked up bro\n"), EXIT_FAILURE);
 	threading(&p);
 	free(p.ph);
 	return (0);
