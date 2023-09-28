@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 16:38:10 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/28 11:52:18 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ typedef struct s_arg
 /*struct du philo*/
 typedef struct s_philo
 {
-	int					id;
 	t_arg				*pa;
 	pthread_t			thread_id;
-	unsigned int		nb_eat;
+	int					id;
+	int					nb_eat;
 	int					eating;
 	int					dying_time;
 	pthread_mutex_t		lock;

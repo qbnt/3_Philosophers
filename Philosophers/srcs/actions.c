@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/26 16:40:31 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/09/28 11:36:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	drop_forks(t_philo *philo);
 void	message(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->pa->write_mutex);
-	printf("%d: Philosopher %d %s\n", time, philo->id, str);
+	printf("%li: Philosopher %d %s\n", (long int)*time, philo->id, str);
 	pthread_mutex_unlock(&philo->pa->write_mutex);
 }
 
@@ -31,33 +31,24 @@ void	eat(t_philo *philo)
 	philo->eating = 1;
 	message(EATING, philo);
 	philo->nb_eat ++;
-	usleap(philo->pa->eat_t);
+	ft_usleep(philo->pa->eat_t);
 	philo->eating = 0;
 	pthread_mutex_unlock(&philo->pa->lock);
 	drop_forks(philo);
 }
 
-void	get_time(t_p *p)
-{
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL))
-		return (perror("gettimeofday() FAILURE\n"));
-	p->a.start_t = (int)((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
 static void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->r_f);
+	pthread_mutex_lock(philo->r_f);
 	message(TAKE_FORKS, philo);
-	pthread_mutex_lock(&philo->l_f);
+	pthread_mutex_lock(philo->l_f);
 	message(TAKE_FORKS, philo);
 }
 
 static void	drop_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->r_f);
-	pthread_mutex_unlock(&philo->l_f);
+	pthread_mutex_unlock(philo->r_f);
+	pthread_mutex_unlock(philo->l_f);
 	message(SLEEPING, philo);
-	usleap(philo->pa->sleep_t);
+	ft_usleep(philo->pa->sleep_t);
 }
