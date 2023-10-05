@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:45:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 13:20:53 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:29:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	init_philo(t_philo *philo, t_arg *arg, int id)
 	philo->pa = arg;
 	philo->nb_eat = 0;
 	philo->eating = 0;
-	philo->dying_time = 0;
+	philo->time_to_die = 0;
+	philo->pa->dead = 0;
 	return (0);
 }
 
@@ -37,12 +38,11 @@ int	init_forks(t_p *p)
 	}
 	p->ph[0].r_f = &p->a.forks[0];
 	p->ph[0].l_f = &p->a.forks[p->a.total - 1];
-	i = 1;
-	while (i < p->a.total)
+	i = 0;
+	while (++i < p->a.total)
 	{
 		p->ph[i].r_f = &p->a.forks[i];
 		p->ph[i].l_f = &p->a.forks[i - 1];
-		i ++;
 	}
 	return (0);
 }

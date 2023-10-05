@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 11:52:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:28:57 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_philo
 	int					id;
 	int					nb_eat;
 	int					eating;
-	int					dying_time;
+	u_int64_t			time_to_die;
 	pthread_mutex_t		lock;
 	pthread_mutex_t		*r_f;
 	pthread_mutex_t		*l_f;

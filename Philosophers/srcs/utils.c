@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:18:28 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 12:55:09 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/05 11:13:58 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,13 @@ static void	ft_bzero(void *s, size_t n);
 
 /*----------------------------------------------------------------------------*/
 
-long int	get_time(void)
+u_int64_t	get_time(void)
 {
 	struct timeval	tv;
-	long int		time;
 
 	if (gettimeofday(&tv, NULL))
-		return (perror("gettimeofday() FAILURE\n"), 0);
-	time = ((tv.tv_sec * 1000000) + (tv.tv_usec));
-	return (time);
-}
-
-int	ft_usleep(suseconds_t time)
-{
-	long int	start;
-
-	start = get_time();
-	while ((get_time() - start) < time)
-		usleep(time / 10);
-	return (0);
+		return (perror("gettimeofday() FAILURE\n"), -1);
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -62,4 +50,14 @@ static void	ft_bzero(void *s, size_t n)
 	ptr = s;
 	while (n--)
 		*ptr++ = '\0';
+}
+
+int	ft_strcmp(char const *s1, char const *s2)
+{
+	while ((unsigned char)*s1 == (unsigned char)*s2 && *s1)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

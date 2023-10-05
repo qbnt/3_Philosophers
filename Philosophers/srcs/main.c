@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 13:51:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:31:25 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,15 @@ int	main(int argc, char **argv)
 {
 	t_p	p;
 
-/*---------------------------------parsing------------------------------------*/
 	if (parsing(argc, argv, &p))
 		return (perror("Invalid Arguments dude\n"), EXIT_FAILURE);
-
-/*----------------------------init_philo_struct-------------------------------*/
 	p.ph = ft_calloc(p.a.total, sizeof(t_philo));
 	if (!p.ph)
 		return (perror("Calloc fucked up bro\n"), EXIT_FAILURE);
-
-/*------------------------------set_philo_n_forkc-----------------------------*/
 	if (set_philo_n_forks(&p))
 		return (perror("Init philo/forks FAILED\n"), free(p.ph), EXIT_FAILURE);
-
-/*-----------------------------start_philos_threads---------------------------*/
 	p.a.start_t = get_time();
 	threading(&p);
-
-/*------------------------------------end-------------------------------------*/
 	end_free(&p);
 	return (0);
 }
@@ -50,13 +41,12 @@ static int	set_philo_n_forks(t_p *p)
 
 	i = -1;
 	while (++i < p->a.total)
-		if (init_philo(&p->ph[i], &p->a, i))
+		if (init_philo(&p->ph[i], &p->a, i + 1))
 			return (1);
 	if (init_forks(p))
 		return (1);
 	return (0);
 }
-
 
 static void	threading(t_p *p)
 {
@@ -64,13 +54,17 @@ static void	threading(t_p *p)
 
 	i = -1;
 	while (++i < p->a.total)
-		if (pthread_create(&p->ph[i].thread_id, NULL, &routine, &p))
+	{
+		if (pthread_create(&p->ph[i].thread_id, NULL, &routine, &p->ph[i]))
 			perror("Error during thread creation\n");
+		usleep(10);
+	}
 	i = -1;
 	while (++i < p->a.total)
 		if (pthread_join(p->ph[i].thread_id, NULL))
 			perror("Error during thread joining\n");
 }
+
 
 static void	end_free(t_p *p)
 {

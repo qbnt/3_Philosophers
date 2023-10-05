@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 13:02:04 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:22:54 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 # include "philosophers_structs.h"
 
 /*defines*/
-# define _INT_MIN -2147483648
-# define _INT_MAX 2147483647
-# define _UINT_MAX 4294967295
+# define _INT_MIN	-2147483648
+# define _INT_MAX	2147483647
+# define _UINT_MAX	4294967295
 
-# define TAKE_FORKS "has taken a fork"
-# define THINKING "is thinking"
-# define SLEEPING "is sleeping"
-# define EATING "is eating"
-# define DIED "died"
+# define TAKE_FORKS	"has taken a fork"
+# define EATING		"is eating"
+# define SLEEPING	"is sleeping"
+# define THINKING	"is thinking"
+# define DIED		"died"
 
 /*----fonctions----*/
 
@@ -42,17 +42,17 @@
 int			parsing(int argc, char **argv, t_p *p);
 int			init_philo(t_philo *philo, t_arg *arg, int id);
 int			init_forks(t_p *p);
-
 /*routine.c*/
-void		*routine(void *arg);
+void		*routine(void *philo);
+void		*supervisor(void *philo_ptr);
 
 /*actions.c*/
 void		message(char *str, t_philo *philo);
 void		eat(t_philo *philo);
 
 /*utils.c*/
-long int	get_time(void);
-int			ft_usleep(suseconds_t time);
+u_int64_t	get_time(void);
 void		*ft_calloc(size_t nmemb, size_t size);
+int	ft_strcmp(char const *s1, char const *s2);
 
 #endif
