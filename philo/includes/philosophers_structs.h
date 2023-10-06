@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/05 14:28:57 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/06 11:23:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_arg
 {
 	int					total;
 	int					nb_meal;
+	int					meal_philo_end;
 	int					death_t;
 	int					eat_t;
 	int					sleep_t;
