@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/05 14:31:25 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/06 09:20:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	threading(t_p *p)
 		if (pthread_join(p->ph[i].thread_id, NULL))
 			perror("Error during thread joining\n");
 }
-
 
 static void	end_free(t_p *p)
 {
