@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:23:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/06 11:24:26 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/09 15:27:07 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ void	*routine(void *philo_ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *) philo_ptr;
-	philo->time_to_die = philo->pa->death_t + get_time();
+	philo->time_to_die = get_time() + philo->pa->death_t;
 	if (pthread_create(&philo->thread_id, NULL, &supervisor, (void *)philo))
 		return ((void *) 0);
 	while (!philo->pa->dead)
 	{
 		eat(philo);
 		message(THINKING, philo);
-		printf("-----------------------------------------\n");
 	}
 	return (philo_ptr);
 }
@@ -61,7 +60,7 @@ void	*check_meal(void *philo_ptr)
 		if (philo->pa->total == philo->pa->meal_philo_end)
 		{
 			pthread_mutex_lock(&philo->pa->lock);
-			printf("oui\n");
+			philo->pa->dead = 1;
 			pthread_mutex_unlock(&philo->pa->lock);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/06 09:47:03 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/09 15:12:43 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	if (set_philo_n_forks(&p))
 		return (perror("Init philo/forks FAILED\n"), free(p.ph), EXIT_FAILURE);
 	p.a.start_t = get_time();
+	printf("start = %lli\n", p.a.start_t);
 	threading(&p);
 	end_free(&p);
 	return (0);
@@ -57,7 +58,8 @@ static void	threading(t_p *p)
 	{
 		if (pthread_create(&p->ph[i].thread_id, NULL, &routine, &p->ph[i]))
 			perror("Error during thread creation\n");
-		usleep(10);
+		if (i % 2 == 0)
+			ft_usleep(10);
 	}
 	i = -1;
 	while (++i < p->a.total)

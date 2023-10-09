@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/06 11:23:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/09 14:57:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 
 # include "philosophers.h"
 
+# define U_LLI_T	unsigned long long int
+
 /*parsing result*/
 typedef struct s_arg
 {
 	int					total;
 	int					nb_meal;
 	int					meal_philo_end;
-	int					death_t;
-	int					eat_t;
-	int					sleep_t;
-	long int			start_t;
+	U_LLI_T				death_t;
+	U_LLI_T				eat_t;
+	U_LLI_T				sleep_t;
+	U_LLI_T				start_t;
 	int					dead;
 	int					end;
 	pthread_mutex_t		*forks;
@@ -40,7 +42,7 @@ typedef struct s_philo
 	int					id;
 	int					nb_eat;
 	int					eating;
-	u_int64_t			time_to_die;
+	U_LLI_T				time_to_die;
 	pthread_mutex_t		lock;
 	pthread_mutex_t		*r_f;
 	pthread_mutex_t		*l_f;

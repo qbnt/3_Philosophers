@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:27:08 by qbanet            #+#    #+#             */
-/*   Updated: 2023/09/28 13:06:37 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/09 14:56:28 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	parsing(int argc, char **argv, t_p *p)
 	if ((argc == 5 || argc == 6) && dstr_is_all_num(argv, 0, 1))
 	{
 		p->a.total = (int)ft_atol(argv[1]);
-		p->a.death_t = (int)ft_atol(argv[2]);
-		p->a.eat_t = (int)ft_atol(argv[3]);
-		p->a.sleep_t = (int)ft_atol(argv[4]);
+		p->a.death_t = (U_LLI_T)ft_atol(argv[2]);
+		p->a.eat_t = (U_LLI_T)ft_atol(argv[3]);
+		p->a.sleep_t = (U_LLI_T)ft_atol(argv[4]);
 		if (argc != 6)
 			p->a.nb_meal = -1;
 		else
