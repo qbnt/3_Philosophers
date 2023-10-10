@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/09 15:12:36 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/10 06:24:57 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			init_forks(t_p *p);
 /*routine.c*/
 void		*routine(void *philo);
 void		*supervisor(void *philo_ptr);
+void	*check_meal(void *philo_ptr);
 
 /*actions.c*/
 void		message(char *str, t_philo *philo);

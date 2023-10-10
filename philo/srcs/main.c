@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/09 15:12:43 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/10 14:41:42 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	main(int argc, char **argv)
 		return (perror("Calloc fucked up bro\n"), EXIT_FAILURE);
 	if (set_philo_n_forks(&p))
 		return (perror("Init philo/forks FAILED\n"), free(p.ph), EXIT_FAILURE);
-	p.a.start_t = get_time();
-	printf("start = %lli\n", p.a.start_t);
 	threading(&p);
 	end_free(&p);
 	return (0);
@@ -42,8 +40,10 @@ static int	set_philo_n_forks(t_p *p)
 
 	i = -1;
 	while (++i < p->a.total)
+	{
 		if (init_philo(&p->ph[i], &p->a, i + 1))
 			return (1);
+	}
 	if (init_forks(p))
 		return (1);
 	return (0);
@@ -51,15 +51,20 @@ static int	set_philo_n_forks(t_p *p)
 
 static void	threading(t_p *p)
 {
-	int	i;
+	int			i;
+	pthread_t	t0;
 
 	i = -1;
+	if (p->a.nb_meal > 0)
+	{
+		if (pthread_create(&t0, NULL, &check_meal, &p->ph[0]))
+			perror("Error during thread creation\n");
+	}
+	p->a.start_t = get_time();
 	while (++i < p->a.total)
 	{
 		if (pthread_create(&p->ph[i].thread_id, NULL, &routine, &p->ph[i]))
 			perror("Error during thread creation\n");
-		if (i % 2 == 0)
-			ft_usleep(10);
 	}
 	i = -1;
 	while (++i < p->a.total)
@@ -73,12 +78,12 @@ static void	end_free(t_p *p)
 
 	i = -1;
 	while (++i < p->a.total)
+	{
 		pthread_mutex_destroy(&p->a.forks[i]);
-	pthread_mutex_destroy(&p->a.write_mutex);
-	pthread_mutex_destroy(&p->a.lock);
-	i = -1;
-	while (++i < p->a.total)
 		pthread_mutex_destroy(&p->ph[i].lock);
+	}
+	pthread_mutex_destroy(&p->a.lock);
+	pthread_mutex_destroy(&p->a.write_mutex);
 	free(p->ph);
 	free(p->a.forks);
 }
