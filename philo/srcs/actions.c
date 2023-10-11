@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/10 14:47:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/11 11:52:39 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	message(char *str, t_philo *philo)
 	if (ft_strcmp(DIED, str) == 0 && philo->pa->dead == 0)
 	{
 		printf("%llu:	Philosophe %d	%s\n", time, philo->id, str);
-		pthread_mutex_lock(&philo->pa->lock);
 		philo->pa->dead = 1;
-		pthread_mutex_unlock(&philo->pa->lock);
 	}
 	if (philo->pa->dead == 0)
 		printf("%llu:	Philosophe %d	%s\n", time, philo->id, str);
@@ -42,13 +40,21 @@ void	eat(t_philo *philo)
 	take_forks(philo);
 	pthread_mutex_lock(&philo->pa->lock);
 	kebab_time = philo->pa->eat_t;
+	pthread_mutex_unlock(&philo->pa->lock);
+	pthread_mutex_lock(&philo->pa->lock);
 	philo->eating = 1;
-	philo->nb_eat = philo->nb_eat + 1;
+	pthread_mutex_unlock(&philo->pa->lock);
+	pthread_mutex_lock(&philo->lock);
+	philo->nb_eat ++;
+	pthread_mutex_unlock(&philo->lock);
 	message(EATING, philo);
+	pthread_mutex_lock(&philo->pa->lock);
 	philo->time_to_die = get_time() + philo->pa->death_t;
 	pthread_mutex_unlock(&philo->pa->lock);
 	usleep(kebab_time * 1000);
+	pthread_mutex_lock(&philo->pa->lock);
 	philo->eating = 0;
+	pthread_mutex_unlock(&philo->pa->lock);
 	drop_forks(philo);
 }
 
