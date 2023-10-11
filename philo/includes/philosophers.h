@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/10 06:24:57 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/11 13:48:33 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			init_forks(t_p *p);
 /*routine.c*/
 void		*routine(void *philo);
 void		*supervisor(void *philo_ptr);
-void	*check_meal(void *philo_ptr);
+void		*check_meal(void *philo_ptr);
 
 /*actions.c*/
 void		message(char *str, t_philo *philo);
@@ -54,8 +54,6 @@ void		eat(t_philo *philo);
 
 /*utils.c*/
 U_LLI_T		get_time(void);
-int			ft_usleep(U_LLI_T time);
-void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_strcmp(char const *s1, char const *s2);
 
 #endif

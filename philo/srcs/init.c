@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:45:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/10 14:43:32 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/11 13:49:08 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	init_forks(t_p *p)
 	int	i;
 
 	i = -1;
-	p->a.forks = ft_calloc(p->a.total, sizeof(pthread_mutex_t));
+	p->a.forks = malloc(p->a.total * sizeof(pthread_mutex_t));
 	while (++i < p->a.total)
 	{
 		if (pthread_mutex_init(&p->a.forks[i], NULL))

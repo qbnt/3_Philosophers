@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/11 11:52:39 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:49:56 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->pa->lock);
 	philo->eating = 1;
 	pthread_mutex_unlock(&philo->pa->lock);
-	pthread_mutex_lock(&philo->lock);
+	pthread_mutex_lock(&philo->pa->lock);
 	philo->nb_eat ++;
-	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_unlock(&philo->pa->lock);
 	message(EATING, philo);
 	pthread_mutex_lock(&philo->pa->lock);
 	philo->time_to_die = get_time() + philo->pa->death_t;
