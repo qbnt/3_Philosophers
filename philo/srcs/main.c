@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/11 14:08:29 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/12 09:14:22 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 
 	if (parsing(argc, argv, &p))
 		return (perror("Invalid Arguments dude\n"), EXIT_FAILURE);
-	p.ph = malloc(p.a.total * sizeof(t_philo));
+	p.ph = malloc(p.a.total * sizeof(t_philo) + 1);
 	if (!p.ph)
 		return (perror("Calloc fucked up bro\n"), EXIT_FAILURE);
 	if (set_philo_n_forks(&p))
@@ -58,7 +58,7 @@ static void	threading(t_p *p)
 	t0 = 0;
 	if (p->a.nb_meal > 0)
 	{
-		if (pthread_create(&t0, NULL, &check_meal, &p->ph[0]))
+		if (pthread_create(&t0, NULL, &check_meal, &p->a))
 			perror("Error during thread creation\n");
 	}
 	p->a.start_t = get_time();
@@ -69,8 +69,10 @@ static void	threading(t_p *p)
 	}
 	i = -1;
 	while (++i < p->a.total)
+	{
 		if (pthread_join(p->ph[i].thread_id, NULL))
 			perror("Error during thread joining\n");
+	}
 	if (t0)
 		if (pthread_join(t0, NULL))
 			perror("Error during thread joining\n");
@@ -88,6 +90,6 @@ static void	end_free(t_p *p)
 	}
 	pthread_mutex_destroy(&p->a.lock);
 	pthread_mutex_destroy(&p->a.write_mutex);
-	free(p->ph);
 	free(p->a.forks);
+	free(p->ph);
 }
