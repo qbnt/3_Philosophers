@@ -14,6 +14,9 @@ OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 # Executable name
 NAME = philo
 
+# Libraries
+LIBS = -lpthread
+
 # Colors for output
 Y = "\033[33m"
 G = "\033[32m"
@@ -27,11 +30,11 @@ $(BUILD_DIR):
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo $(Y)Compiling [$<]...$(X)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo $(Y)Linking [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS)  # Include the pthread library
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

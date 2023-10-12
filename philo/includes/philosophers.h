@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/12 08:55:50 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/12 11:57:18 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILOSOPHERS_H
 
 /*----libraries----*/
-# include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -57,6 +56,5 @@ U_LLI_T		get_time(void);
 int			ft_strcmp(char const *s1, char const *s2);
 void		unlock_mutex_all(pthread_mutex_t *t1, pthread_mutex_t *t2,
 				pthread_mutex_t *t3, pthread_mutex_t *t4);
-void		unlock_all_forks(t_arg *args);
 
 #endif
