@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:27:08 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/09 14:56:28 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 09:02:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	parsing(int argc, char **argv, t_p *p)
 			return (1);
 		p->a.dead = 0;
 		p->a.end = 0;
+		p->a.meal_philo_end = 0;
 		pthread_mutex_init(&p->a.lock, NULL);
 		pthread_mutex_init(&p->a.write_mutex, NULL);
 		return (0);

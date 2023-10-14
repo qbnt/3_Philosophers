@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:45:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/12 13:56:11 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/13 08:29:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int	init_philo(t_philo *philo, t_arg *arg, int id)
 	philo->pa = arg;
 	philo->nb_eat = 0;
 	philo->eating = 0;
+	philo->death_t = arg->death_t;
+	philo->eat_t = arg->eat_t;
+	philo->sleep_t = arg->sleep_t;
 	philo->time_to_die = 0;
 	philo->pa->dead = 0;
-	pthread_mutex_init(&philo->lock, NULL);
 	return (0);
 }
 
