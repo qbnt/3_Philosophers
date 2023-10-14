@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 09:19:47 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 11:11:36 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define _UINT_MAX	4294967295
 # define U_LLI_T	unsigned long long int
 
-# define TAKE_FORKS	"has taken a fork"
+# define TAKE_FORKS	"has taken a fork "
 # define EATING		"is eating"
 # define SLEEPING	"is sleeping"
 # define THINKING	"is thinking"
@@ -45,6 +45,7 @@ int			init_forks(t_p *p);
 void		*routine(void *philo);
 void		*supervisor(void *philo_ptr);
 void		*check_meal(void *philo_ptr);
+void		*one(void *philo_ptr);
 
 /*actions.c*/
 void		message(char *str, t_philo *philo);

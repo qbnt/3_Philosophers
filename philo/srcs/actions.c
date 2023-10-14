@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 09:15:45 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 11:25:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	message(char *str, t_philo *philo)
 	if (ft_strcmp(DIED, str) == 0 && philo->pa->dead == 0)
 	{
 		pthread_mutex_unlock(&philo->pa->lock);
-		printf("%llu %d %s\n", time, philo->id, str);
+		printf("%llu	Philo %d   		%s\n", time, philo->id, str);
 		pthread_mutex_lock(&philo->pa->lock);
 		philo->pa->dead = 1;
 		pthread_mutex_unlock(&philo->pa->lock);
@@ -38,7 +38,7 @@ void	message(char *str, t_philo *philo)
 	pthread_mutex_unlock(&philo->pa->lock);
 	pthread_mutex_lock(&philo->pa->lock);
 	if (philo->pa->dead == 0)
-		printf("%llu %d %s\n", time, philo->id, str);
+		printf("%llu	Philo %d   		%s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->pa->lock);
 	pthread_mutex_unlock(&philo->pa->write_mutex);
 }
@@ -67,6 +67,6 @@ static void	take_forks(t_philo *philo)
 
 static void	drop_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->r_f);
 	pthread_mutex_unlock(philo->l_f);
+	pthread_mutex_unlock(philo->r_f);
 }

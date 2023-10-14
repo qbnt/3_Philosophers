@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:23:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 09:27:23 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 11:17:10 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,17 @@ void	*check_meal(void *info_ptr)
 	}
 	pthread_mutex_unlock(&info->lock);
 	return ((void *)0);
+}
+
+void	*one(void *philo_ptr)
+{
+	t_philo	*philo;
+
+	philo = philo_ptr;
+	pthread_mutex_lock(philo->l_f);
+	message(TAKE_FORKS, philo);
+	usleep(philo->death_t * 1000);
+	message(DIED, philo);
+	pthread_mutex_unlock(philo->l_f);
+	return ((void *) 0);
 }

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:45:05 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/13 08:29:24 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 10:27:05 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_philo(t_philo *philo, t_arg *arg, int id)
 	philo->death_t = arg->death_t;
 	philo->eat_t = arg->eat_t;
 	philo->sleep_t = arg->sleep_t;
-	philo->time_to_die = 0;
+	philo->time_to_die = arg->death_t;
 	philo->pa->dead = 0;
 	return (0);
 }
@@ -35,10 +35,8 @@ int	init_forks(t_p *p)
 	i = -1;
 	p->a.forks = malloc(p->a.total * sizeof(pthread_mutex_t));
 	while (++i < p->a.total)
-	{
 		if (pthread_mutex_init(&p->a.forks[i], NULL))
 			return (1);
-	}
 	p->ph[0].r_f = &p->a.forks[0];
 	p->ph[0].l_f = &p->a.forks[p->a.total - 1];
 	i = 1;
