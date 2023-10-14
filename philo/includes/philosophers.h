@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/12 11:57:18 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/14 09:19:47 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define DIED		"died"
 
 /*----fonctions----*/
-
 
 /*parsing.c*/
 int			parsing(int argc, char **argv, t_p *p);
