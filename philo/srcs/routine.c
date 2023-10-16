@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:23:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 11:17:10 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 10:42:02 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,19 @@ void	*supervisor(void *philo_ptr)
 	while (philo->pa->dead == 0)
 	{
 		pthread_mutex_unlock(&philo->pa->lock);
+		pthread_mutex_lock(&philo->lock);
 		pthread_mutex_lock(&philo->pa->lock);
 		if (get_time() > philo->time_to_die && philo->eating == 0)
 		{
+			pthread_mutex_unlock(&philo->lock);
 			pthread_mutex_unlock(&philo->pa->lock);
 			message(DIED, philo);
+			pthread_mutex_lock(&philo->lock);
 			pthread_mutex_lock(&philo->pa->lock);
 		}
+		pthread_mutex_unlock(&philo->lock);
 		pthread_mutex_unlock(&philo->pa->lock);
-		pthread_mutex_lock(&philo->pa->lock);
 		kutta(philo);
-		pthread_mutex_unlock(&philo->pa->lock);
 		pthread_mutex_lock(&philo->pa->lock);
 	}
 	pthread_mutex_unlock(&philo->pa->lock);
@@ -68,15 +70,23 @@ void	*supervisor(void *philo_ptr)
 
 static void	kutta(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->lock);
+	pthread_mutex_lock(&philo->pa->lock);
 	if (philo->nb_eat == philo->pa->nb_meal)
 	{
+		pthread_mutex_unlock(&philo->lock);
 		pthread_mutex_unlock(&philo->pa->lock);
 		pthread_mutex_lock(&philo->pa->lock);
 		philo->pa->meal_philo_end ++;
 		pthread_mutex_unlock(&philo->pa->lock);
+		pthread_mutex_lock(&philo->lock);
 		philo->nb_eat ++;
+		pthread_mutex_unlock(&philo->lock);
+		pthread_mutex_lock(&philo->lock);
 		pthread_mutex_lock(&philo->pa->lock);
 	}
+	pthread_mutex_unlock(&philo->lock);
+	pthread_mutex_unlock(&philo->pa->lock);
 }
 
 void	*check_meal(void *info_ptr)

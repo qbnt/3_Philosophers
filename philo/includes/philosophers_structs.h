@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/13 08:27:54 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 10:20:26 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 {
 	t_arg				*pa;
 	pthread_t			thread_id;
+	pthread_mutex_t		lock;
 	int					id;
 	int					nb_eat;
 	int					eating;
