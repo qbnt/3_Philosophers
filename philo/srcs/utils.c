@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:18:28 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/12 12:45:36 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 13:58:52 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /*----------------------------------------------------------------------------*/
 
-U_LLI_T	get_time(void)
+t_u_lli	get_time(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
 		return (perror("gettimeofday() FAILURE\n"), -1);
-	return ((tv.tv_sec * (U_LLI_T)1000) + (tv.tv_usec / 1000));
+	return ((tv.tv_sec * (t_u_lli)1000) + (tv.tv_usec / 1000));
 }
 
 int	ft_strcmp(char const *s1, char const *s2)

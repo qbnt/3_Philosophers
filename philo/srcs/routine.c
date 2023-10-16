@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:23:50 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/16 10:42:02 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:15:49 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*supervisor(void *philo_ptr)
 		pthread_mutex_unlock(&philo->pa->lock);
 		pthread_mutex_lock(&philo->lock);
 		pthread_mutex_lock(&philo->pa->lock);
-		if (get_time() > philo->time_to_die && philo->eating == 0)
+		if (get_time() > philo->time_to_die + 5 && philo->eating == 0)
 		{
 			pthread_mutex_unlock(&philo->lock);
 			pthread_mutex_unlock(&philo->pa->lock);

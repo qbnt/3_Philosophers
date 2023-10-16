@@ -6,16 +6,14 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:09:52 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/16 10:20:26 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:03:24 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_STRUCTS_H
 # define PHILOSOPHERS_STRUCTS_H
 
-# include "philosophers.h"
-
-# define U_LLI_T	unsigned long long int
+typedef unsigned long long int	t_u_lli;
 
 /*parsing result*/
 typedef struct s_arg
@@ -23,12 +21,11 @@ typedef struct s_arg
 	int					total;
 	int					nb_meal;
 	int					meal_philo_end;
-	U_LLI_T				death_t;
-	U_LLI_T				eat_t;
-	U_LLI_T				sleep_t;
-	U_LLI_T				start_t;
 	int					dead;
-	int					end;
+	t_u_lli				death_t;
+	t_u_lli				eat_t;
+	t_u_lli				sleep_t;
+	t_u_lli				start_t;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		lock;
 	pthread_mutex_t		write_mutex;
@@ -43,10 +40,10 @@ typedef struct s_philo
 	int					id;
 	int					nb_eat;
 	int					eating;
-	U_LLI_T				death_t;
-	U_LLI_T				eat_t;
-	U_LLI_T				sleep_t;
-	U_LLI_T				time_to_die;
+	t_u_lli				death_t;
+	t_u_lli				eat_t;
+	t_u_lli				sleep_t;
+	t_u_lli				time_to_die;
 	pthread_mutex_t		*r_f;
 	pthread_mutex_t		*l_f;
 }						t_philo;

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:34 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 11:11:36 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:03:09 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 # define _INT_MIN	-2147483648
 # define _INT_MAX	2147483647
 # define _UINT_MAX	4294967295
-# define U_LLI_T	unsigned long long int
-
 # define TAKE_FORKS	"has taken a fork "
 # define EATING		"is eating"
 # define SLEEPING	"is sleeping"
 # define THINKING	"is thinking"
 # define DIED		"died"
+
+typedef unsigned long long int	t_u_lli;
 
 /*----fonctions----*/
 
@@ -52,7 +52,7 @@ void		message(char *str, t_philo *philo);
 void		eat(t_philo *philo);
 
 /*utils.c*/
-U_LLI_T		get_time(void);
+t_u_lli		get_time(void);
 int			ft_strcmp(char const *s1, char const *s2);
 void		unlock_mutex_all(pthread_mutex_t *t1, pthread_mutex_t *t2,
 				pthread_mutex_t *t3, pthread_mutex_t *t4);

@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:29:26 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/16 10:38:11 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 13:59:15 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	drop_forks(t_philo *philo);
 
 void	message(char *str, t_philo *philo)
 {
-	U_LLI_T	time;
+	t_u_lli	time;
 
 	pthread_mutex_lock(&philo->pa->write_mutex);
 	pthread_mutex_lock(&philo->pa->lock);
@@ -53,9 +53,9 @@ void	eat(t_philo *philo)
 	philo->nb_eat ++;
 	pthread_mutex_unlock(&philo->lock);
 	message(EATING, philo);
-	pthread_mutex_lock(&philo->pa->lock);
+	pthread_mutex_lock(&philo->lock);
 	philo->time_to_die = get_time() + philo->death_t;
-	pthread_mutex_unlock(&philo->pa->lock);
+	pthread_mutex_unlock(&philo->lock);
 	usleep(philo->eat_t * 1000);
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = 0;

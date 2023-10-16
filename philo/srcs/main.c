@@ -6,7 +6,7 @@
 /*   By: qbanet <qbanet@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:55:38 by qbanet            #+#    #+#             */
-/*   Updated: 2023/10/14 11:14:41 by qbanet           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:11:10 by qbanet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	case_one(t_p *p)
 		return (perror("Error durinf thread creation\n"), 1);
 	pthread_detach(p->ph[0].thread_id);
 	while (p->a.dead == 0)
-		usleep(1);
+		usleep(100);
 	end_free(p);
 	return (0);
 }
@@ -78,8 +78,10 @@ static void	threading(t_p *p)
 			perror("Error during thread creation\n");
 	p->a.start_t = get_time();
 	while (++i < p->a.total)
+	{
 		if (pthread_create(&p->ph[i].thread_id, NULL, &routine, &p->ph[i]))
 			perror("Error during thread creation\n");
+	}
 	i = -1;
 	while (++i < p->a.total)
 		if (pthread_join(p->ph[i].thread_id, NULL))
